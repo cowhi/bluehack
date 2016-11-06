@@ -1,7 +1,8 @@
 import json
 from os.path import join, dirname
 from watson_developer_cloud import PersonalityInsightsV3
-import generator
+import generator_api
+from sklearn.neighbors import BallTree
 
 """
 The example returns a JSON response whose content is the same as that in
@@ -11,10 +12,13 @@ The example returns a JSON response whose content is the same as that in
 json_example1 = {
    "contentItems": [
       {
-         "content": "Wow, I liked @TheRock before, now I really SEE how special he is. The daughter story was IT for me. So great! #MasterClass"
+         "content": "Wow, I liked @TheRock before, now I really SEE how \
+         special he is. The daughter story was IT for me. So great! \
+         #MasterClass"
       },
       {
-         "content": ".@TheRock how did you Know to listen to your gut and Not go back to football? #Masterclass"
+         "content": ".@TheRock how did you Know to listen to your gut and \
+         Not go back to football? #Masterclass"
       }
     ]
 }
@@ -35,6 +39,24 @@ def get_insight(json_dict):
 def get_insight_file(json_file='./resources/personality-v3.json'):
     with open(json_file) as profile_json:
         get_insight(profile_json.read())
+
+
+def get_user_reviews_for_product(pID):
+    # somehow get user IDs from ./data/products/P_summary.json
+    return uIDs
+
+
+def get_personalities(uIDs):
+    personalities = None
+    return personalities
+
+def rank_reviews(uID, pID):
+    relevant_uIDs = get_user_reviews_for_product(pID)
+    personalities = get_personalities(relevant_uIDs)
+    tree = BallTree(personalities, leaf_size=2)
+    dist, ind = tree.query([uID], k=150)
+    pass
+
 
 if __name__ == "__main__":
     json_example = generator_api.get_list_text_amazon(UserID=1234)
