@@ -36,7 +36,7 @@ def get_insight(json_dict):
     print(json.dumps(profile, indent=2))
 
 
-def get_insight_file(json_file='./resources/personality-v3.json'):
+def get_insight_file(json_file='./helper/resources/personality-v3.json'):
     with open(json_file) as profile_json:
         get_insight(profile_json.read())
 
