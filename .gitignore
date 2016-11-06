@@ -36,7 +36,7 @@
 ehthumbs.db
 Thumbs.db
 
-# Folder #
+# Other #
 ##########
 .ipynb_checkpoints/
-data/comments/
+data/comments/reviews_Apps_for_Android_5.json
