@@ -1,5 +1,5 @@
 import json
-from os.path import join, dirname
+# from os.path import join, dirname
 from watson_developer_cloud import PersonalityInsightsV3
 import generator_api
 from sklearn.neighbors import BallTree
@@ -43,19 +43,23 @@ def get_insight_file(json_file='./resources/personality-v3.json'):
 
 def get_user_reviews_for_product(pID):
     # somehow get user IDs from ./data/products/P_summary.json
+    uIDs = None
     return uIDs
 
 
 def get_personalities(uIDs):
+    # get personalities from user db for all given uIDs
     personalities = None
     return personalities
 
+
 def rank_reviews(uID, pID):
+    # rank the reviews for a product for a specific customer
     relevant_uIDs = get_user_reviews_for_product(pID)
     personalities = get_personalities(relevant_uIDs)
     tree = BallTree(personalities, leaf_size=2)
-    dist, ind = tree.query([uID], k=150)
-    pass
+    dist, ind = tree.query([uID], k=len(relevant_uIDs))
+    return ind
 
 
 if __name__ == "__main__":
